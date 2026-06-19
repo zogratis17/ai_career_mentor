@@ -1,0 +1,131 @@
+.mentor-chat {
+  animation: slideInUp 0.4s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mentor-header {
+  margin-bottom: 2rem;
+}
+
+.mentor-header h1 {
+  margin-bottom: 0.5rem;
+}
+
+.mentor-header p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+.mentor-tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.tab {
+  padding: 1rem;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.tab:hover {
+  color: var(--text-primary);
+}
+
+.tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+.mentor-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.recommendation-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recommendation-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(236, 72, 153, 0.05) 100%);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.list-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--primary-color);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  flex-shrink: 0;
+  font-size: 0.85rem;
+}
+
+.highlight {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+.motivation {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+}
+
+.motivation h3,
+.motivation p {
+  color: white;
+}
+
+.motivation .text-secondary {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .mentor-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    flex: 1;
+    min-width: 150px;
+  }
+}
