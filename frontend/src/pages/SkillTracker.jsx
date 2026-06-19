@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { FiPlus } from 'react-icons/fi';
 import SkillInput from '../components/SkillInput';
 import './SkillTracker.css';
 
