@@ -1242,3 +1242,119 @@ select.custom-select:hover, select.custom-select:focus {
     gap: 1rem;
   }
 }
+
+/* NEW INTERACTIVE FEATURE STYLES */
+/* Pomodoro spin keyframes & timer modifications */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Option cards for Diagnostic Quiz */
+.quiz-option-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quiz-option-card:hover {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.quiz-option-card.selected {
+  background: rgba(6, 182, 212, 0.12);
+  border-color: var(--secondary);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.15);
+}
+
+.quiz-option-card::after {
+  content: '';
+  width: 12px;
+  height: 12px;
+  border: 1.5px solid var(--text-muted);
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+
+.quiz-option-card.selected::after {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: 0 0 5px var(--secondary);
+}
+
+/* Coding Challenge elements inside roadmap */
+.practice-challenge-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--secondary);
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-top: 0.5rem;
+  transition: all 0.2s;
+}
+
+.practice-challenge-btn:hover {
+  background: var(--secondary);
+  color: #000;
+  box-shadow: var(--shadow-neon-cyan);
+}
+
+/* Interview Prep Modal Tab styling */
+.prep-tab-btn.active {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--border-glass) !important;
+}
+
+.interview-option-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  text-align: left;
+  color: var(--text-secondary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.interview-option-btn:hover {
+  background: rgba(139, 92, 246, 0.05);
+  border-color: rgba(139, 92, 246, 0.3);
+  color: #fff;
+}
+
+.interview-option-btn.correct {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: #10b981 !important;
+  color: #34d399 !important;
+}
+
+.interview-option-btn.wrong {
+  background: rgba(244, 63, 94, 0.12) !important;
+  border-color: #f43f5e !important;
+  color: #fb7185 !important;
+}
+

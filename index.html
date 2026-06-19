@@ -25,6 +25,17 @@
       </div>
 
       <div class="header-controls">
+        <!-- Floating Pomodoro Timer -->
+        <div class="slider-container" style="gap:0.6rem; padding: 0.4rem 0.8rem;">
+          <button id="timer-toggle-btn" style="background:transparent; border:none; color:var(--secondary); cursor:pointer; display:flex; align-items:center; gap:0.4rem; font-family:var(--font-display); font-weight:600; font-size:0.9rem; outline:none;">
+            <svg id="timer-icon" viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2.5" fill="none">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <span id="timer-display">25:00</span>
+          </button>
+          <span id="timer-label" style="font-size:0.75rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.5px;">Study block</span>
+        </div>
+
         <!-- Track Selector -->
         <div class="track-selector-wrapper">
           <span class="track-label">Target Specialization:</span>
@@ -217,7 +228,127 @@
       </div>
       <div class="modal-footer">
         <button class="btn-secondary" id="modal-cancel-btn">Cancel</button>
-        <button class="btn-primary" id="modal-apply-btn">Apply Now</button>
+        <button class="btn-primary" id="modal-prep-btn" style="background:var(--primary); color:#fff; box-shadow:var(--shadow-neon);">Aegis Prep & Optimize</button>
+        <button class="btn-primary" id="modal-apply-btn">Apply Direct</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnostic Quiz Modal -->
+  <div class="modal-overlay" id="quiz-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">AI Skill Diagnostic</h2>
+        <button class="modal-close" id="quiz-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="quiz-progress-text" style="font-size:0.75rem; color:var(--secondary); text-transform:uppercase; font-family:var(--font-display); margin-bottom:0.4rem;">Question 1 of 4</div>
+        <h3 id="quiz-question-title" style="color:#fff; margin-bottom:1rem; font-size:1.1rem; line-height:1.4;">Select your primary engineering background:</h3>
+        <div id="quiz-options-container" style="display:flex; flex-direction:column; gap:0.6rem;">
+          <!-- Options list dynamic -->
+        </div>
+        <!-- Loader simulation -->
+        <div id="quiz-loader-container" style="display:none; text-align:center; padding:1.5rem 0;">
+          <div style="border: 3px solid var(--border-glass); border-top: 3px solid var(--primary); border-radius: 50%; width: 36px; height: 36px; margin: 0 auto 1rem auto; animation: spin 1s linear infinite;"></div>
+          <p id="quiz-loader-text" style="color:var(--text-secondary); font-size:0.85rem;">Orchestrating model configurations...</p>
+        </div>
+      </div>
+      <div class="modal-footer" id="quiz-footer-buttons">
+        <button class="btn-secondary" id="quiz-prev-btn" style="display:none;">Back</button>
+        <button class="btn-primary" id="quiz-next-btn">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Coding Playground Modal -->
+  <div class="modal-overlay" id="playground-modal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h2 class="modal-title" id="playground-title">Code Verification Sandbox</h2>
+        <button class="modal-close" id="playground-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top:0.8rem; gap:0.8rem;">
+        <div class="playground-instructions" style="background:rgba(255,255,255,0.02); border:1px solid var(--border-glass); padding:0.8rem; border-radius:8px;">
+          <h4 id="challenge-name" style="color:var(--secondary); font-size:0.95rem; margin-bottom:0.3rem;">Challenge 1: Dense Layer Forward Pass</h4>
+          <p id="challenge-desc" style="font-size:0.8rem; line-height:1.4; color:var(--text-secondary);">Fill in the line to calculate the output of a single neuron with weight matrix W, input x, and bias b: y = Wx + b.</p>
+        </div>
+        
+        <div class="code-editor-wrapper" style="border:1px solid var(--border-glass); border-radius:10px; overflow:hidden; background:#0b0c13;">
+          <div class="editor-header" style="background:#131522; padding:0.4rem 1rem; border-bottom:1px solid var(--border-glass); display:flex; justify-content:space-between; align-items:center; font-size:0.75rem; color:var(--text-secondary);">
+            <span id="playground-filename">main.py</span>
+            <span style="text-transform:uppercase; color:var(--primary); font-weight:600; letter-spacing:0.5px;">Python 3</span>
+          </div>
+          <div class="editor-input-area" style="display:flex; font-family:monospace; font-size:0.85rem; line-height:1.5; padding:0.8rem 0;">
+            <pre style="padding: 0 0.6rem 0 0.8rem; text-align:right; color:var(--text-muted); border-right:1px solid var(--border-glass); user-select:none; margin:0;">1
+2
+3
+4
+5</pre>
+            <textarea id="playground-code-textarea" spellcheck="false" autocomplete="off" wrap="off" style="flex:1; background:transparent; border:none; resize:none; color:#a5b4fc; font-family:monospace; font-size:0.85rem; padding:0 0.8rem; outline:none; height:100px; line-height:1.5; overflow-y:auto; width:100%;"></textarea>
+          </div>
+        </div>
+
+        <div class="terminal-output" id="playground-terminal" style="background:#020306; border:1px solid var(--border-glass); border-radius:8px; padding:0.8rem; font-family:monospace; font-size:0.78rem; color:#10b981; min-height:60px; line-height:1.4; overflow-y:auto; max-height:120px;">
+          <span style="color:var(--text-muted);">&gt; Sandbox loaded. Waiting for compilation...</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" id="playground-reset-btn">Reset Code</button>
+        <button class="btn-primary" id="playground-run-btn">Run & Verify</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Job Prep Interview Modal -->
+  <div class="modal-overlay" id="job-prep-modal">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h2 class="modal-title">Job Prep & Profile Tailoring</h2>
+        <button class="modal-close" id="prep-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" style="padding-top:0.8rem; gap:1.2rem;">
+        
+        <div class="prep-tabs" style="display:flex; background:rgba(255,255,255,0.03); border:1px solid var(--border-glass); padding:0.25rem; border-radius:8px;">
+          <button class="prep-tab-btn active" id="tab-btn-optimizer" style="flex:1; padding:0.4rem; border:none; background:transparent; color:var(--text-muted); font-size:0.8rem; font-weight:600; font-family:var(--font-body); cursor:pointer; border-radius:6px; transition:all 0.2s;">Resume Optimizer</button>
+          <button class="prep-tab-btn" id="tab-btn-interview" style="flex:1; padding:0.4rem; border:none; background:transparent; color:var(--text-muted); font-size:0.8rem; font-weight:600; font-family:var(--font-body); cursor:pointer; border-radius:6px; transition:all 0.2s;">Technical Interview Prep</button>
+        </div>
+
+        <!-- Panel 1: Resume Tailoring -->
+        <div class="prep-panel active" id="panel-optimizer" style="display:flex; flex-direction:column; gap:0.8rem;">
+          <h4 style="color:#fff; font-size:0.9rem;">Skill Alignment Matrix</h4>
+          <div class="resume-match-report" id="resume-match-report" style="display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; background:rgba(0,0,0,0.1); border:1px solid var(--border-glass); padding:0.8rem; border-radius:8px; font-size:0.8rem;">
+            <!-- Injected by JS -->
+          </div>
+          <h4 style="color:#fff; font-size:0.9rem;">Tailored Bullet Injections</h4>
+          <div class="resume-diff-box" id="resume-diff-box" style="background:#07080d; border:1px solid var(--border-glass); padding:0.8rem; border-radius:8px; font-family:monospace; font-size:0.75rem; max-height:120px; overflow-y:auto; line-height:1.4; color:var(--text-secondary);">
+            <!-- Injected by JS -->
+          </div>
+          <button class="btn-primary" id="optimize-resume-action" style="width:100%; font-size:0.85rem; padding:0.6rem;">Inject & Apply Custom Optimization</button>
+        </div>
+
+        <!-- Panel 2: Technical Interview -->
+        <div class="prep-panel" id="panel-interview" style="display:none; flex-direction:column; gap:0.8rem;">
+          <div id="interview-start-screen" style="display:flex; flex-direction:column; gap:0.8rem; text-align:center; padding:1rem 0;">
+            <p style="font-size:0.85rem; color:var(--text-secondary); line-height:1.5;">Simulate a 3-question chatbot technical screening tailored to this position. Scoring well boosts your profile compatibility rating.</p>
+            <button class="btn-primary" id="start-interview-btn" style="width:200px; margin:0 auto; padding:0.6rem; font-size:0.85rem;">Start Technical Drill</button>
+          </div>
+          
+          <div id="interview-question-screen" style="display:none; flex-direction:column; gap:0.8rem;">
+            <div id="interview-q-progress" style="font-size:0.75rem; color:var(--secondary); text-transform:uppercase; font-family:var(--font-display);">Question 1 of 3</div>
+            <h4 id="interview-question-text" style="color:#fff; font-size:0.95rem; line-height:1.4; margin:0.2rem 0;">Question details here</h4>
+            <div id="interview-options-container" style="display:flex; flex-direction:column; gap:0.6rem;">
+              <!-- Options -->
+            </div>
+          </div>
+          
+          <div id="interview-result-screen" style="display:none; text-align:center; padding:1rem 0; flex-direction:column; gap:0.8rem;">
+            <h4 style="color:#fff; font-size:1.1rem;">Diagnostic Scorecard</h4>
+            <div style="width:64px; height:64px; border-radius:50%; border:2px solid var(--secondary); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:1.4rem; color:var(--secondary); font-weight:700; margin:0.4rem auto; box-shadow:var(--shadow-neon-cyan);" id="interview-score-display">3/3</div>
+            <p id="interview-score-feedback" style="font-size:0.82rem; color:var(--text-secondary); line-height:1.4; padding:0 1rem;">Feedback text.</p>
+            <button class="btn-primary" id="finish-interview-btn" style="width:160px; margin:0.5rem auto 0 auto; padding:0.5rem; font-size:0.82rem;">Return to Hub</button>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>

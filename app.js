@@ -1,6 +1,6 @@
 /**
  * AEGIS - Agentic AI Career Mentor & Job Recommendation Engine
- * Core Application Script
+ * Core Application Script - High Interactivity Update
  */
 
 // ==========================================
@@ -22,7 +22,14 @@ const TRACKS_DATA = {
           { name: "3Blue1Brown Neural Networks", url: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" },
           { name: "Karpathy's micrograd", url: "https://github.com/karpathy/micrograd" }
         ],
-        skillImpacts: { math: 15, frameworks: 20 }
+        skillImpacts: { math: 15, frameworks: 20 },
+        challenge: {
+          name: "Forward Pass of a Dense Neuron",
+          desc: "Calculate the dense output 'y' given weight matrix 'W', inputs 'x', and bias 'b' using numpy dot product.",
+          filename: "forward.py",
+          initialCode: "import numpy as np\n\ndef forward(W, x, b):\n    # Calculate Wx + b\n    return _____",
+          solutionRegex: /return\s+np\.(dot\s*\(\s*W\s*,\s*x\s*\)|dot\s*\(\s*x\s*,\s*W\s*\))\s*\+\s*b|return\s+(W\s*@\s*x|x\s*@\s*W)\s*\+\s*b/
+        }
       },
       {
         id: "genai_s2",
@@ -33,7 +40,14 @@ const TRACKS_DATA = {
           { name: "Attention Is All You Need Paper", url: "https://arxiv.org/abs/1706.03762" },
           { name: "Karpathy's Let's Build GPT", url: "https://youtu.be/kCc8FmEb1nY" }
         ],
-        skillImpacts: { math: 15, frameworks: 30, llms: 20 }
+        skillImpacts: { math: 15, frameworks: 30, llms: 20 },
+        challenge: {
+          name: "Scaled Dot-Product Attention Score",
+          desc: "Calculate the attention scores before softmax: Q K^T / sqrt(d_k) using numpy operations.",
+          filename: "attention.py",
+          initialCode: "import numpy as np\n\ndef attention_score(Q, K, d_k):\n    # Calculate Q * K.T / sqrt(d_k)\n    return _____",
+          solutionRegex: /return\s+np\.dot\(\s*Q\s*,\s*K\.T\s*\)\s*\/\s*np\.sqrt\(\s*d_k\s*\)|return\s+\(\s*Q\s*@\s*K\.T\s*\)\s*\/\s*np\.sqrt\(\s*d_k\s*\)/
+        }
       },
       {
         id: "genai_s3",
@@ -153,7 +167,14 @@ const TRACKS_DATA = {
         resources: [
           { name: "YOLOv8 Docs", url: "https://docs.ultralytics.com/" }
         ],
-        skillImpacts: { math: 10, frameworks: 35 }
+        skillImpacts: { math: 10, frameworks: 35 },
+        challenge: {
+          name: "Intersection over Union (IoU) Fraction",
+          desc: "Complete the fraction logic to compute bounding box overlap IoU: intersection area divided by union area.",
+          filename: "iou.py",
+          initialCode: "def calculate_iou(intersection, union):\n    # Calculate IoU fraction\n    return _____",
+          solutionRegex: /return\s+intersection\s*\/\s*union/
+        }
       },
       {
         id: "cv_s3",
@@ -212,7 +233,14 @@ const TRACKS_DATA = {
           { name: "vLLM Engine", url: "https://github.com/vllm-project/vllm" },
           { name: "PagedAttention Paper", url: "https://arxiv.org/abs/2309.06180" }
         ],
-        skillImpacts: { operations: 35, llms: 15, frameworks: 10 }
+        skillImpacts: { operations: 35, llms: 15, frameworks: 10 },
+        challenge: {
+          name: "Model FP16 Quantization Serving",
+          desc: "Convert a PyTorch transformer model to 16-bit precision to fit on standard inference GPU memory pools.",
+          filename: "quant.py",
+          initialCode: "import torch\n\ndef serving_quantize(model):\n    # Convert model to float16 weights\n    return _____",
+          solutionRegex: /return\s+model\.half\(\s*\)|return\s+model\.to\(\s*torch\.float16\s*\)/
+        }
       },
       {
         id: "llmops_s3",
@@ -264,7 +292,28 @@ const JOBS_DATABASE = [
     matchBase: 65,
     skills: ["Python", "API integration", "LangChain", "VectorDB"],
     track: "genai",
-    desc: "Deploy API-wrapped generative intelligence modules. Implement RAG connectors with corporate databases and maintain vector index integrity."
+    desc: "Deploy API-wrapped generative intelligence modules. Implement RAG connectors with corporate databases and maintain vector index integrity.",
+    interview: [
+      {
+        q: "What data structure is optimized for semantic similarity search of embeddings?",
+        options: ["B-Tree Index", "Vector Index (e.g. HNSW, IVF)", "Hash Table", "Binary Search Tree"],
+        correctIndex: 1
+      },
+      {
+        q: "In LangChain, what is a 'Chain' responsible for?",
+        options: ["Encrypting user credentials", "Chaining multiple prompt layers, models, and tools sequentially", "Running parallel API fetching tasks"],
+        correctIndex: 1
+      },
+      {
+        q: "What does RAG stand for?",
+        options: ["Random Adversarial Generation", "Retrieval Augmented Generation", "Recurrent Attention Gate"],
+        correctIndex: 1
+      }
+    ],
+    resumeInjections: [
+      "+ Designed semantic search nodes using Pinecone HNSW indexing",
+      "+ Implemented prompt sequential loops in LangChain for multi-agent calls"
+    ]
   },
   {
     id: "job_2",
@@ -277,7 +326,28 @@ const JOBS_DATABASE = [
     matchBase: 60,
     skills: ["Python", "PyTorch", "NLTK", "HuggingFace"],
     track: "nlp",
-    desc: "Maintain tokenization microservices, train sentence encoders, and perform fine-tuning setups on custom BERT and classifier models."
+    desc: "Maintain tokenization microservices, train sentence encoders, and perform fine-tuning setups on custom BERT and classifier models.",
+    interview: [
+      {
+        q: "Which sub-word tokenization algorithm is natively used by the BERT tokenizer?",
+        options: ["WordPiece", "Byte-Pair Encoding (BPE)", "SentencePiece"],
+        correctIndex: 0
+      },
+      {
+        q: "What is the primary role of the Self-Attention mechanism in NLP?",
+        options: ["Evaluating text sentiment", "Computing correlation of each token against all other tokens in a sequence", "Performing character mapping"],
+        correctIndex: 1
+      },
+      {
+        q: "Which metric is standard for evaluating text summarization quality?",
+        options: ["GLUE Score", "BLEU Score", "ROUGE Score"],
+        correctIndex: 2
+      }
+    ],
+    resumeInjections: [
+      "+ Finetuned BERT token classifiers using PyTorch training wrappers",
+      "+ Audited text generation token sequences with ROUGE metrics"
+    ]
   },
   {
     id: "job_3",
@@ -290,7 +360,28 @@ const JOBS_DATABASE = [
     matchBase: 55,
     skills: ["PyTorch", "Transformer Architecture", "RAG", "LoRA"],
     track: "genai",
-    desc: "Design domain-specific fine-tuning pipelines. Quantize transformer architectures for Edge execution and configure custom attention layers."
+    desc: "Design domain-specific fine-tuning pipelines. Quantize transformer architectures for Edge execution and configure custom attention layers.",
+    interview: [
+      {
+        q: "Which parameter controls nucleus sampling by restricting predictions to a cumulative probability threshold?",
+        options: ["Temperature", "Top-P", "Frequency Penalty"],
+        correctIndex: 1
+      },
+      {
+        q: "How does LoRA reduce fine-tuning memory footprint?",
+        options: ["Freezing base layers and injecting low-rank parameter decomposition matrices", "Quantizing optimizer states to float8", "Using CPU swapping"],
+        correctIndex: 0
+      },
+      {
+        q: "Which alignment method optimizes models directly from human ranking without a standalone reward model?",
+        options: ["PPO RLHF", "DPO (Direct Preference Optimization)", "Supervised Tuning (SFT)"],
+        correctIndex: 1
+      }
+    ],
+    resumeInjections: [
+      "+ Configured LoRA adapter injections on Llama models to optimize local training memory",
+      "+ Optimized alignment paths using DPO preference frameworks"
+    ]
   },
   {
     id: "job_4",
@@ -303,7 +394,28 @@ const JOBS_DATABASE = [
     matchBase: 50,
     skills: ["Python", "C++", "PyTorch", "OpenCV", "YOLO"],
     track: "cv",
-    desc: "Optimize spatial boundary-box prediction models. Train and fine-tune convolutional neural networks and deploy custom vision transformers."
+    desc: "Optimize spatial boundary-box prediction models. Train and fine-tune convolutional neural networks and deploy custom vision transformers.",
+    interview: [
+      {
+        q: "What algebraic formulation represents skip-connections in ResNet blocks?",
+        options: ["y = F(x) * x", "y = F(x) + x", "y = F(x) / x"],
+        correctIndex: 1
+      },
+      {
+        q: "Which model suite is optimized for boundary box segmentation tasks in real-time vision loops?",
+        options: ["YOLOv8-Seg", "ViT", "AlexNet"],
+        correctIndex: 0
+      },
+      {
+        q: "What does Vision Transformer (ViT) split input images into to process them as sequences?",
+        options: ["Fuzzy coordinates", "Non-overlapping patches", "Pixel grids"],
+        correctIndex: 1
+      }
+    ],
+    resumeInjections: [
+      "+ Trained custom ResNet skip-architectures for object segmentation tasks",
+      "+ Compiled YOLOv8-Seg modules to compile Edge detection pipelines"
+    ]
   },
   {
     id: "job_5",
@@ -316,7 +428,28 @@ const JOBS_DATABASE = [
     matchBase: 45,
     skills: ["Kubernetes", "Docker", "Triton Inference", "MLflow"],
     track: "llmops",
-    desc: "Architect GPU scheduling pipelines inside Kubernetes cluster loops. Configure Triton inference engines with PagedAttention and monitor telemetry logs."
+    desc: "Architect GPU scheduling pipelines inside Kubernetes cluster loops. Configure Triton inference engines with PagedAttention and monitor telemetry logs.",
+    interview: [
+      {
+        q: "What technique improves serving throughput by caching keys and values of tokens?",
+        options: ["Dynamic quantizing", "KV Caching (e.g. PagedAttention)", "Lazy weights loading"],
+        correctIndex: 1
+      },
+      {
+        q: "Which engine is optimized for high-throughput serving of LLMs via continuous batching?",
+        options: ["vLLM", "Flask / WSGI", "Triton CPU Server"],
+        correctIndex: 0
+      },
+      {
+        q: "What is a main advantage of Triton Inference Server?",
+        options: ["Translating code between Python and C++", "Hosting multiple framework models concurrently with dynamic batching support", "Writing SQL connectors"],
+        correctIndex: 1
+      }
+    ],
+    resumeInjections: [
+      "+ Integrated vLLM serving runtimes with dynamic PagedAttention support",
+      "+ Automated GPU scaling scripts in Kubernetes pipelines"
+    ]
   },
   {
     id: "job_6",
@@ -329,7 +462,28 @@ const JOBS_DATABASE = [
     matchBase: 40,
     skills: ["RLHF", "DPO", "Custom Tokenizers", "Scale LLM Serving"],
     track: "genai",
-    desc: "Lead custom foundation model training initiatives. Architect RLHF/DPO loops, manage high-density supercomputer clusters, and deploy safety guardrails."
+    desc: "Lead custom foundation model training initiatives. Architect RLHF/DPO loops, manage high-density supercomputer clusters, and deploy safety guardrails.",
+    interview: [
+      {
+        q: "Which module checks incoming/outgoing prompts for toxic content and safety policy violations?",
+        options: ["MLflow", "Llama Guard / NeMo Guardrails", "Triton Engine"],
+        correctIndex: 1
+      },
+      {
+        q: "What GPU architecture represents standard high-bandwidth hardware for foundation model training?",
+        options: ["NVIDIA H100/A100 Tensor Core GPUs", "NVIDIA RTX 4090", "Apple M3 Max"],
+        correctIndex: 0
+      },
+      {
+        q: "In RLHF, what is the role of the Reward Model?",
+        options: ["Sampling new prompt questions", "Predicting scalar rewards representing human preference alignment for outputs", "Quantizing target weights"],
+        correctIndex: 1
+      }
+    ],
+    resumeInjections: [
+      "+ Coordinated LLM safety loops using Llama Guard validation checks",
+      "+ Managed cluster nodes on H100 systems to perform model updates"
+    ]
   }
 ];
 
@@ -342,6 +496,43 @@ const INITIAL_SKILLS = {
   operations: 30  // Understands standard DevOps (Docker, Git), but not LLMOps
 };
 
+// Diagnostic Quiz questions
+const DIAGNOSTIC_QUESTIONS = [
+  {
+    title: "What is your primary software engineering background?",
+    options: [
+      { text: "Backend Dev (Python, Node, SQL, APIs)", skillWeight: { dev: 90, math: 25, frameworks: 15, llms: 25, operations: 35 } },
+      { text: "Frontend / Mobile Dev (JS, React, Mobile UI)", skillWeight: { dev: 85, math: 20, frameworks: 10, llms: 20, operations: 25 } },
+      { text: "Data Analyst / BI (Python, SQL, Pandas, Tableau)", skillWeight: { dev: 75, math: 40, frameworks: 20, llms: 15, operations: 20 } },
+      { text: "Full Stack Engineer (Generalist)", skillWeight: { dev: 90, math: 25, frameworks: 15, llms: 20, operations: 30 } }
+    ]
+  },
+  {
+    title: "How comfortable are you with Linear Algebra, Calculus, and Probability?",
+    options: [
+      { text: "Minimal (Know basic matrices, need algebra refresher)", skillWeight: { math: 25 } },
+      { text: "Intermediate (Understand derivatives, dot products, probability)", skillWeight: { math: 50 } },
+      { text: "Advanced (Formulate gradients, backpropagation, and multivariate distributions)", skillWeight: { math: 80 } }
+    ]
+  },
+  {
+    title: "What is your practical experience with training loops and deep learning frameworks?",
+    options: [
+      { text: "None (Never written neural network training loops)", skillWeight: { frameworks: 15 } },
+      { text: "Concept Only (Completed academic tutorials, used simple wrappers)", skillWeight: { frameworks: 35 } },
+      { text: "Practical (Wrote PyTorch train loaders, custom weights, loss functions)", skillWeight: { frameworks: 65 } }
+    ]
+  },
+  {
+    title: "Have you configured GPU servers, quantized models, or scaled inference containers?",
+    options: [
+      { text: "No (Used standard CPU hosting or API keys)", skillWeight: { operations: 30, llms: 20 } },
+      { text: "Basic (Used Docker, know simple quantization)", skillWeight: { operations: 50, llms: 35 } },
+      { text: "Production (Managed vLLM/Triton servers, CUDA setups, K8s)", skillWeight: { operations: 80, llms: 60 } }
+    ]
+  }
+];
+
 // ==========================================
 // 2. STATE MANAGER
 // ==========================================
@@ -352,11 +543,18 @@ const State = {
   completedSteps: new Set(),
   skills: { ...INITIAL_SKILLS },
   activePlatformFilter: "all",
+  studyHoursLogged: 0,
   
-  // Recalculates user's skills based on marked steps
+  // Custom interactive bonuses
+  jobInterviewsDone: {}, // jobId -> score (max 3)
+  optimizedJobs: new Set(), // jobIds optimized via Resume Optimizer
+  diagnosticCompleted: false,
+
   recalculateSkills() {
-    // Reset to base
-    this.skills = { ...INITIAL_SKILLS };
+    // If diagnostic completed, we use the user's customized baseline, otherwise static initial
+    if (!this.diagnosticCompleted) {
+      this.skills = { ...INITIAL_SKILLS };
+    }
     
     // Add impacts of completed steps in current track
     const steps = TRACKS_DATA[this.currentTrack].steps;
@@ -365,6 +563,17 @@ const State = {
         Object.entries(step.skillImpacts || {}).forEach(([skill, impact]) => {
           this.skills[skill] = Math.min(100, (this.skills[skill] || 0) + impact);
         });
+      }
+    });
+
+    // Add bonus impact from completed practice playgrounds
+    this.completedSteps.forEach(stepId => {
+      // Find step
+      const step = steps.find(s => s.id === stepId);
+      if (step && step.challenge) {
+        // Double the frameworks and math impacts if they passed coding challenge
+        this.skills.frameworks = Math.min(100, this.skills.frameworks + 5);
+        this.skills.math = Math.min(100, this.skills.math + 5);
       }
     });
   },
@@ -532,8 +741,6 @@ const CurriculumAgent = {
   renderRoadmap() {
     const container = document.getElementById("roadmap-steps-container");
     const durationLabel = document.getElementById("timeline-duration-label");
-    const progressText = document.getElementById("roadmap-progress-text");
-    const progressBar = document.getElementById("roadmap-progress-bar");
     if (!container) return;
 
     const track = TRACKS_DATA[State.currentTrack];
@@ -572,6 +779,17 @@ const CurriculumAgent = {
         </a>
       `).join("");
 
+      // Challenge practice button
+      const practiceBtn = step.challenge ? `
+        <button class="practice-challenge-btn" onclick="PlaygroundEngine.openPlayground('${step.id}')">
+          <svg viewBox="0 0 24 24" width="10" height="10" stroke="currentColor" stroke-width="2.5" fill="none">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          ${isCompleted ? 'Retry Coding Practice' : 'Start Code Sandbox Practice'}
+        </button>
+      ` : '';
+
       stepHTML += `
         <div class="timeline-step ${isCompleted ? 'completed' : ''} ${isActive ? 'active' : ''}" id="step-node-${step.id}">
           <div class="timeline-node"></div>
@@ -585,9 +803,10 @@ const CurriculumAgent = {
             </div>
             <h4 class="step-title">${step.title}</h4>
             <p class="step-desc">${step.desc}</p>
-            <div class="step-resources">
+            <div class="step-resources" style="margin-bottom: 0.4rem;">
               ${resourceLinks}
             </div>
+            ${practiceBtn}
           </div>
         </div>
       `;
@@ -672,9 +891,18 @@ const JobScoutAgent = {
       
       // Calculate dynamic match score
       // As user completes steps, match score increases from its base score toward 98%
-      const matchScore = isLocked 
+      let matchScore = isLocked 
         ? Math.round(job.matchBase * 0.8) // Reduced preview match score when locked
-        : Math.round(job.matchBase + ((98 - job.matchBase) * (progressPercent / 100)));
+        : Math.round(job.matchBase + ((90 - job.matchBase) * (progressPercent / 100)));
+      
+      // Add custom quiz bonuses
+      const interviewScore = State.jobInterviewsDone[job.id] || 0;
+      matchScore += interviewScore * 3; // Up to +9% bonus
+      if (State.optimizedJobs.has(job.id)) {
+        matchScore += 5; // +5% resume optimization bonus
+      }
+
+      matchScore = Math.min(99, matchScore);
       
       // SVG Circle Gauge Math
       const circleRadius = 14;
@@ -791,12 +1019,434 @@ const JobScoutAgent = {
 
     overlay.classList.add("active");
     
+    // Set up Prep & Tailor action button
+    const prepBtn = document.getElementById("modal-prep-btn");
+    prepBtn.onclick = () => {
+      overlay.classList.remove("active");
+      InterviewSimulator.openPrepCenter(job.id);
+    };
+
     // Track event for apply button inside modal
     const applyButton = document.getElementById("modal-apply-btn");
     applyButton.onclick = () => {
       alert(`Success! Aegis Mentor has formatted and customized your resume matching: ${job.skills.join(", ")}, and initiated your application on ${job.platform === 'linkedin' ? 'LinkedIn' : 'Naukri'} portal.`);
       overlay.classList.remove("active");
     };
+  }
+};
+
+/**
+ * DiagnosticQuiz - Manages the interactive entry quiz assessment.
+ */
+const DiagnosticQuiz = {
+  currentQuestionIndex: 0,
+  selectedOptionIndex: null,
+  answers: [],
+
+  openQuiz() {
+    this.currentQuestionIndex = 0;
+    this.selectedOptionIndex = null;
+    this.answers = [];
+    document.getElementById("quiz-modal").classList.add("active");
+    this.renderQuestion();
+  },
+
+  renderQuestion() {
+    const progressText = document.getElementById("quiz-progress-text");
+    const questionTitle = document.getElementById("quiz-question-title");
+    const optionsContainer = document.getElementById("quiz-options-container");
+    const prevBtn = document.getElementById("quiz-prev-btn");
+    const nextBtn = document.getElementById("quiz-next-btn");
+    const footer = document.getElementById("quiz-footer-buttons");
+    const loader = document.getElementById("quiz-loader-container");
+
+    loader.style.display = "none";
+    optionsContainer.style.display = "flex";
+    questionTitle.style.display = "block";
+    progressText.style.display = "block";
+    footer.style.display = "flex";
+
+    const question = DIAGNOSTIC_QUESTIONS[this.currentQuestionIndex];
+    progressText.innerText = `Diagnostic Assessment: Question ${this.currentQuestionIndex + 1} of ${DIAGNOSTIC_QUESTIONS.length}`;
+    questionTitle.innerText = question.title;
+
+    optionsContainer.innerHTML = question.options.map((opt, index) => `
+      <div class="quiz-option-card ${this.selectedOptionIndex === index ? 'selected' : ''}" onclick="DiagnosticQuiz.selectOption(${index})">
+        <span>${opt.text}</span>
+      </div>
+    `).join("");
+
+    prevBtn.style.display = this.currentQuestionIndex > 0 ? "block" : "none";
+    nextBtn.innerText = this.currentQuestionIndex === DIAGNOSTIC_QUESTIONS.length - 1 ? "Complete Audit" : "Next";
+    nextBtn.disabled = this.selectedOptionIndex === null;
+  },
+
+  selectOption(idx) {
+    this.selectedOptionIndex = idx;
+    const cards = document.querySelectorAll("#quiz-options-container .quiz-option-card");
+    cards.forEach((c, index) => {
+      c.classList.toggle("selected", index === idx);
+    });
+    document.getElementById("quiz-next-btn").disabled = false;
+  },
+
+  nextQuestion() {
+    this.answers[this.currentQuestionIndex] = this.selectedOptionIndex;
+    
+    if (this.currentQuestionIndex < DIAGNOSTIC_QUESTIONS.length - 1) {
+      this.currentQuestionIndex++;
+      this.selectedOptionIndex = this.answers[this.currentQuestionIndex] !== undefined ? this.answers[this.currentQuestionIndex] : null;
+      this.renderQuestion();
+    } else {
+      this.calculateResults();
+    }
+  },
+
+  prevQuestion() {
+    if (this.currentQuestionIndex > 0) {
+      this.currentQuestionIndex--;
+      this.selectedOptionIndex = this.answers[this.currentQuestionIndex];
+      this.renderQuestion();
+    }
+  },
+
+  calculateResults() {
+    // Show spinner loader screen
+    const optionsContainer = document.getElementById("quiz-options-container");
+    const questionTitle = document.getElementById("quiz-question-title");
+    const progressText = document.getElementById("quiz-progress-text");
+    const footer = document.getElementById("quiz-footer-buttons");
+    const loader = document.getElementById("quiz-loader-container");
+    const loaderText = document.getElementById("quiz-loader-text");
+
+    optionsContainer.style.display = "none";
+    questionTitle.style.display = "none";
+    progressText.style.display = "none";
+    footer.style.display = "none";
+    loader.style.display = "block";
+
+    const loadingStages = [
+      "Parsing baseline software engineering capabilities...",
+      "Evaluating mathematical vector foundations...",
+      "Mapping framework experiences against target curriculum parameters...",
+      "Matching Naukri and LinkedIn index benchmarks..."
+    ];
+
+    let stage = 0;
+    const interval = setInterval(() => {
+      if (stage < loadingStages.length) {
+        loaderText.innerText = loadingStages[stage];
+        stage++;
+      } else {
+        clearInterval(interval);
+        
+        // Compute actual skills weights
+        const computedSkills = { dev: 40, math: 20, frameworks: 10, llms: 10, operations: 15 };
+        this.answers.forEach((ansIndex, qIndex) => {
+          const opt = DIAGNOSTIC_QUESTIONS[qIndex].options[ansIndex];
+          Object.entries(opt.skillWeight || {}).forEach(([skill, val]) => {
+            computedSkills[skill] = Math.max(computedSkills[skill], val);
+          });
+        });
+
+        // Save states
+        State.skills = computedSkills;
+        State.diagnosticCompleted = true;
+        State.recalculateSkills();
+        
+        // Close modal
+        document.getElementById("quiz-modal").classList.remove("active");
+
+        // Re-render
+        SkillAuditingAgent.renderRadarChart();
+        CurriculumAgent.renderRoadmap();
+        JobScoutAgent.renderJobs();
+
+        // Dialogue reaction
+        const backgroundText = DIAGNOSTIC_QUESTIONS[0].options[this.answers[0]].text;
+        const feedback = `Diagnostic Audit Complete! 📊 I've verified your **${backgroundText}** profile. Your starting Skill Radar has been calibrated. Math foundations are benchmarked at **${State.skills.math}%** and Deep Learning Frameworks at **${State.skills.frameworks}%**. Let's tackle Module 1 to close your gaps!`;
+        AegisMentorChat.addBubble("system", "Diagnostic Profile Calibrated");
+        AegisMentorChat.addBubble("assistant", feedback);
+      }
+    }, 850);
+  }
+};
+
+/**
+ * PlaygroundEngine - Manages the IDE compiler simulation coding playgrounds.
+ */
+const PlaygroundEngine = {
+  activeStepId: null,
+
+  openPlayground(stepId) {
+    const track = TRACKS_DATA[State.currentTrack];
+    const step = track.steps.find(s => s.id === stepId);
+    if (!step || !step.challenge) return;
+
+    this.activeStepId = stepId;
+    document.getElementById("playground-modal").classList.add("active");
+    document.getElementById("challenge-name").innerText = step.challenge.name;
+    document.getElementById("challenge-desc").innerText = step.challenge.desc;
+    document.getElementById("playground-filename").innerText = step.challenge.filename;
+    
+    const textarea = document.getElementById("playground-code-textarea");
+    textarea.value = step.challenge.initialCode;
+    
+    // Reset Terminal
+    const terminal = document.getElementById("playground-terminal");
+    terminal.innerHTML = `<span style="color:var(--text-muted);">&gt; Sandbox loaded. Waiting for verification...</span>`;
+    terminal.style.color = "#10b981";
+  },
+
+  verifyCode() {
+    const track = TRACKS_DATA[State.currentTrack];
+    const step = track.steps.find(s => s.id === this.activeStepId);
+    if (!step || !step.challenge) return;
+
+    const code = document.getElementById("playground-code-textarea").value;
+    const terminal = document.getElementById("playground-terminal");
+
+    terminal.innerHTML = `<span style="color:#a5b4fc;">&gt; python ${step.challenge.filename} --eval</span><br><span style="color:var(--text-muted);">Compiling neural scripts...</span>`;
+    
+    setTimeout(() => {
+      // Validate code using solution regex
+      if (step.challenge.solutionRegex.test(code)) {
+        terminal.innerHTML += `<br><span style="color:#10b981;">[SUCCESS] Test cases passed! compilation 0.00ms. Code matched math formulation checks.</span>`;
+        
+        // Auto-complete checkpoint
+        setTimeout(() => {
+          document.getElementById("playground-modal").classList.remove("active");
+          
+          // Complete step in state
+          State.completedSteps.add(this.activeStepId);
+          State.recalculateSkills();
+          
+          // Refresh views
+          SkillAuditingAgent.renderRadarChart();
+          CurriculumAgent.renderRoadmap();
+          JobScoutAgent.renderJobs();
+
+          // Dialogue notification
+          AegisMentorChat.addBubble("assistant", `💻 **Sandbox Verified!** You successfully solved the practice coding challenge for **${step.title}**. I've added a bonus boost to your PyTorch Frameworks & Math skill metrics!`);
+        }, 1200);
+      } else {
+        terminal.style.color = "var(--accent)";
+        terminal.innerHTML += `<br><span style="color:var(--accent);">[ERROR] Compilation mismatch: Output did not match expected mathematical formulation. Please verify matrix orientation or variables.</span>`;
+      }
+    }, 900);
+  }
+};
+
+/**
+ * InterviewSimulator - Handles the mock screening tech quiz for each job.
+ */
+const InterviewSimulator = {
+  activeJobId: null,
+  activeQuestionIndex: 0,
+  score: 0,
+
+  openPrepCenter(jobId) {
+    const job = JOBS_DATABASE.find(j => j.id === jobId);
+    if (!job) return;
+
+    this.activeJobId = jobId;
+    document.getElementById("job-prep-modal").classList.add("active");
+    this.showTab("optimizer");
+
+    // Optimizer report setup
+    const progress = State.getProgressPercentage();
+    const report = document.getElementById("resume-match-report");
+    const diff = document.getElementById("resume-diff-box");
+
+    // Match matrix logic
+    report.innerHTML = `
+      <div>
+        <div style="font-weight:600; color:#10b981; margin-bottom:0.2rem;">Matched Keywords</div>
+        <div style="color:var(--text-secondary); line-height:1.4;">
+          ${job.skills.slice(0, Math.ceil(job.skills.length * (progress / 100)) + 1).map(s => `✓ ${s}`).join("<br>")}
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:600; color:var(--accent); margin-bottom:0.2rem;">Missing Keywords</div>
+        <div style="color:var(--text-secondary); line-height:1.4;">
+          ${progress >= 95 ? "None! Complete match." : job.skills.slice(Math.ceil(job.skills.length * (progress / 100)) + 1).map(s => `✗ ${s} (Study roadmap)`).join("<br>")}
+        </div>
+      </div>
+    `;
+
+    // Optimizer Diff setup
+    if (State.optimizedJobs.has(jobId)) {
+      diff.innerHTML = `<span style="color:#10b981;">// Optimization already applied to profile.</span>`;
+      document.getElementById("optimize-resume-action").disabled = true;
+      document.getElementById("optimize-resume-action").innerText = "Resume Optimization Injected";
+    } else {
+      diff.innerHTML = job.resumeInjections.join("<br>");
+      document.getElementById("optimize-resume-action").disabled = false;
+      document.getElementById("optimize-resume-action").innerText = "Inject & Apply Custom Optimization";
+    }
+
+    // Reset Interview Screens
+    document.getElementById("interview-start-screen").style.display = "flex";
+    document.getElementById("interview-question-screen").style.display = "none";
+    document.getElementById("interview-result-screen").style.display = "none";
+  },
+
+  showTab(tabId) {
+    const tabs = document.querySelectorAll(".prep-tab-btn");
+    const panels = document.querySelectorAll(".prep-panel");
+    
+    tabs.forEach(t => t.classList.toggle("active", t.id === `tab-btn-${tabId}`));
+    panels.forEach(p => p.style.display = p.id === `panel-${tabId}` ? "flex" : "none");
+  },
+
+  applyResumeOptimization() {
+    State.optimizedJobs.add(this.activeJobId);
+    
+    document.getElementById("optimize-resume-action").disabled = true;
+    document.getElementById("optimize-resume-action").innerText = "Resume Optimization Injected";
+    document.getElementById("resume-diff-box").innerHTML = `<span style="color:#10b981;">// Optimization Applied! Match score boosted by +5%</span>`;
+
+    JobScoutAgent.renderJobs();
+    AegisMentorChat.addBubble("assistant", `📄 **Resume Optimized!** Tailored bullet points for vectors and architectures have been compiled into your developer profile. This boosts your candidate match rating.`);
+  },
+
+  startInterview() {
+    this.activeQuestionIndex = 0;
+    this.score = 0;
+    
+    document.getElementById("interview-start-screen").style.display = "none";
+    document.getElementById("interview-question-screen").style.display = "flex";
+    
+    this.renderQuestion();
+  },
+
+  renderQuestion() {
+    const job = JOBS_DATABASE.find(j => j.id === this.activeJobId);
+    if (!job || !job.interview) return;
+
+    const progress = document.getElementById("interview-q-progress");
+    const questionText = document.getElementById("interview-question-text");
+    const optionsContainer = document.getElementById("interview-options-container");
+
+    const qData = job.interview[this.activeQuestionIndex];
+    progress.innerText = `Question ${this.activeQuestionIndex + 1} of ${job.interview.length}`;
+    questionText.innerText = qData.q;
+
+    optionsContainer.innerHTML = qData.options.map((opt, idx) => `
+      <button class="interview-option-btn" onclick="InterviewSimulator.answerQuestion(${idx})">${opt}</button>
+    `).join("");
+  },
+
+  answerQuestion(selectedIdx) {
+    const job = JOBS_DATABASE.find(j => j.id === this.activeJobId);
+    if (!job || !job.interview) return;
+
+    const qData = job.interview[this.activeQuestionIndex];
+    const buttons = document.querySelectorAll("#interview-options-container .interview-option-btn");
+    
+    // Disable all options
+    buttons.forEach(btn => btn.disabled = true);
+
+    // Apply color classes
+    if (selectedIdx === qData.correctIndex) {
+      buttons[selectedIdx].classList.add("correct");
+      this.score++;
+    } else {
+      buttons[selectedIdx].classList.add("wrong");
+      buttons[qData.correctIndex].classList.add("correct");
+    }
+
+    setTimeout(() => {
+      if (this.activeQuestionIndex < job.interview.length - 1) {
+        this.activeQuestionIndex++;
+        this.renderQuestion();
+      } else {
+        this.showResults();
+      }
+    }, 1200);
+  },
+
+  showResults() {
+    document.getElementById("interview-question-screen").style.display = "none";
+    document.getElementById("interview-result-screen").style.display = "flex";
+
+    const scoreDisplay = document.getElementById("interview-score-display");
+    const feedback = document.getElementById("interview-score-feedback");
+    
+    scoreDisplay.innerText = `${this.score}/3`;
+    
+    // Save score in state
+    State.jobInterviewsDone[this.activeJobId] = this.score;
+    JobScoutAgent.renderJobs(); // Redraw with score bonus
+
+    if (this.score === 3) {
+      feedback.innerText = "Exceptional performance! 🌟 Perfect scoring boosts candidate match metrics on the Opportunity Hub (+9% bonus).";
+      AegisMentorChat.addBubble("assistant", `🎯 **Mock Interview Passed!** You achieved a perfect score of 3/3 on the technical screening drill for **${JOBS_DATABASE.find(j => j.id === this.activeJobId).title}**.`);
+    } else if (this.score >= 1) {
+      feedback.innerText = `Good effort! You answered ${this.score} questions correctly. Re-read the curriculum roadmap gaps to secure a perfect score next time.`;
+    } else {
+      feedback.innerText = "Score: 0/3. We recommend reviewing the foundational modules of this track before attempting another screening drill.";
+    }
+  }
+};
+
+/**
+ * PomodoroTimer - Study timer that logs hours.
+ */
+const PomodoroTimer = {
+  durationSeconds: 25 * 60,
+  timerInterval: null,
+  isRunning: false,
+
+  init() {
+    const btn = document.getElementById("timer-toggle-btn");
+    btn.addEventListener("click", () => this.toggle());
+  },
+
+  toggle() {
+    const icon = document.getElementById("timer-icon");
+    const label = document.getElementById("timer-label");
+
+    if (this.isRunning) {
+      // Pause
+      clearInterval(this.timerInterval);
+      this.isRunning = false;
+      label.innerText = "Study block paused";
+      icon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`; // Play symbol
+    } else {
+      // Start
+      this.isRunning = true;
+      label.innerText = "Studying...";
+      icon.innerHTML = `<rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect>`; // Pause symbol
+      
+      this.timerInterval = setInterval(() => {
+        if (this.durationSeconds > 0) {
+          this.durationSeconds--;
+          this.updateDisplay();
+        } else {
+          // Timer finished!
+          clearInterval(this.timerInterval);
+          this.isRunning = false;
+          this.durationSeconds = 25 * 60; // Reset
+          this.updateDisplay();
+          
+          label.innerText = "Block completed!";
+          icon.innerHTML = `<polygon points="5 3 19 12 5 21 5 3"></polygon>`;
+
+          // Log study hour
+          State.studyHoursLogged += 2;
+          AegisMentorChat.addBubble("system", "Pomodoro Study Interval Logged");
+          AegisMentorChat.addBubble("assistant", `⏱️ **Interval Complete!** You've completed a 25-minute focused study block. Logged **+2 Hrs** to your study tracker. Taking short breaks keeps attention neural pathways fresh!`);
+        }
+      }, 1000);
+    }
+  },
+
+  updateDisplay() {
+    const mins = Math.floor(this.durationSeconds / 60);
+    const secs = this.durationSeconds % 60;
+    const disp = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    document.getElementById("timer-display").innerText = disp;
   }
 };
 
@@ -826,7 +1476,8 @@ const AegisMentorChat = {
     bubble.className = `chat-bubble ${sender}`;
     
     // Parse brief markdown bolding
-    const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const formattedText = text.replace(/\*\*(.*?)\*\"/g, '<strong>$1</strong>')
+                             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
     bubble.innerHTML = `
       ${formattedText}
@@ -885,6 +1536,21 @@ const AegisMentorChat = {
         }
       } else if (input.includes("pytorch") || input.includes("matrix") || input.includes("resource")) {
         response = `To study Math or PyTorch, open the **Week 1 (Deep Learning Foundations)** node in your Roadmap. Click on the resource tag **"Karpathy's micrograd"** to learn exactly how backpropagation builds gradients!`;
+      } else if (input.includes("quiz") || input.includes("assessment") || input.includes("start diagnostic")) {
+        response = `Launching Diagnostic Assessment...`;
+        setTimeout(() => DiagnosticQuiz.openQuiz(), 500);
+        return;
+      } else if (input.includes("lora")) {
+        response = `**LoRA (Low-Rank Adaptation)** is a parameter-efficient fine-tuning (PEFT) method. Instead of updating all billions of model weights, it freezes the base model and updates small rank decomposition matrices (A and B). This cuts VRAM requirements by over 70%, allowing fine-tuning on consumer-grade GPUs!`;
+      } else if (input.includes("rag")) {
+        response = `**RAG (Retrieval-Augmented Generation)** is a framework that connects an LLM to external data. 
+        <br><br>
+        <table>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);"><td style="padding:0.4rem; font-weight:600;">Step</td><td style="padding:0.4rem; font-weight:600;">Description</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:0.4rem;">1. Embed</td><td style="padding:0.4rem;">Convert document chunks to vectors.</td></tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.05);"><td style="padding:0.4rem;">2. Retrieve</td><td style="padding:0.4rem;">Search Vector DB (FAISS/Pinecone) for similarity matches.</td></tr>
+          <tr><td style="padding:0.4rem;">3. Inject</td><td style="padding:0.4rem;">Provide matches inside LLM prompt context.</td></tr>
+        </table>`;
       } else {
         response = `Understood. As your AI Mentor, I recommend continuing your **${TRACKS_DATA[State.currentTrack].title}** modules. If you need details on specific steps, check off modules to see your matching index shift on the radar graph.`;
       }
@@ -898,9 +1564,9 @@ const AegisMentorChat = {
     if (!container) return;
 
     const prompts = [
+      { text: "⚡ Start Diagnostic Assessment", action: "start diagnostic" },
       { text: "🔍 Analyze my Skill Gaps", action: "Analyze my skill gaps" },
-      { text: "⏱️ Check my Time Commitment", action: "How long will my curriculum take?" },
-      { text: "💼 Next Job Unlock Goal", action: "What is my next job unlock milestone?" }
+      { text: "⏱️ Check my Time Commitment", action: "How long will my curriculum take?" }
     ];
 
     container.innerHTML = prompts.map(p => `
@@ -925,6 +1591,30 @@ function initApp() {
   const modalClose = document.getElementById("modal-close-btn");
   const modalCancel = document.getElementById("modal-cancel-btn");
   const modalOverlay = document.getElementById("job-details-modal");
+
+  // Quiz Modal binds
+  document.getElementById("quiz-close-btn").onclick = () => document.getElementById("quiz-modal").classList.remove("active");
+  document.getElementById("quiz-prev-btn").onclick = () => DiagnosticQuiz.prevQuestion();
+  document.getElementById("quiz-next-btn").onclick = () => DiagnosticQuiz.nextQuestion();
+
+  // Playground Modal binds
+  document.getElementById("playground-close-btn").onclick = () => document.getElementById("playground-modal").classList.remove("active");
+  document.getElementById("playground-reset-btn").onclick = () => {
+    const track = TRACKS_DATA[State.currentTrack];
+    const step = track.steps.find(s => s.id === PlaygroundEngine.activeStepId);
+    if (step && step.challenge) {
+      document.getElementById("playground-code-textarea").value = step.challenge.initialCode;
+    }
+  };
+  document.getElementById("playground-run-btn").onclick = () => PlaygroundEngine.verifyCode();
+
+  // Job Prep Modal binds
+  document.getElementById("prep-close-btn").onclick = () => document.getElementById("job-prep-modal").classList.remove("active");
+  document.getElementById("tab-btn-optimizer").onclick = () => InterviewSimulator.showTab("optimizer");
+  document.getElementById("tab-btn-interview").onclick = () => InterviewSimulator.showTab("interview");
+  document.getElementById("optimize-resume-action").onclick = () => InterviewSimulator.applyResumeOptimization();
+  document.getElementById("start-interview-btn").onclick = () => InterviewSimulator.startInterview();
+  document.getElementById("finish-interview-btn").onclick = () => document.getElementById("job-prep-modal").classList.remove("active");
 
   // Track Selector Change
   trackSelect.addEventListener("change", (e) => {
@@ -990,12 +1680,18 @@ function initApp() {
     if (e.target === modalOverlay) closeModal();
   });
 
-  // Initialize Agents
+  // Initialize Agents & Widgets
   State.recalculateSkills();
   SkillAuditingAgent.renderRadarChart();
   CurriculumAgent.renderRoadmap();
   JobScoutAgent.renderJobs();
   AegisMentorChat.init();
+  PomodoroTimer.init();
+  
+  // Prompt user to take diagnostic audit after initial loading
+  setTimeout(() => {
+    AegisMentorChat.addBubble("assistant", "💡 **Tip:** Click **'Start Diagnostic Assessment'** below to set up your customized skill baseline profiles!");
+  }, 1500);
 }
 
 // Window load init trigger
