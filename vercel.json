@@ -1,0 +1,6 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/build",
+  "envPrefix": "REACT_APP_",
+  "framework": "react"
+}
