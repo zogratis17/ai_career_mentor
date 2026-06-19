@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FiMessageCircle, FiRefreshCw } from 'react-icons/fi';
+import { FiRefreshCw } from 'react-icons/fi';
 import './MentorChat.css';
 
 function MentorChat({ userId }) {
@@ -11,6 +11,7 @@ function MentorChat({ userId }) {
 
   useEffect(() => {
     fetchMentorData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchMentorData = async () => {

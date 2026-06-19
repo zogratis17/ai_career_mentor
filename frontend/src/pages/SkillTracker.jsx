@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FiPlus, FiTrash2 } from 'react-icons/fi';
 import SkillInput from '../components/SkillInput';
 import './SkillTracker.css';
 
@@ -11,6 +10,7 @@ function SkillTracker({ userId }) {
 
   useEffect(() => {
     fetchProgress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchProgress = async () => {

@@ -8,6 +8,7 @@ function LearningPaths({ userId }) {
 
   useEffect(() => {
     fetchRoadmap();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchRoadmap = async () => {

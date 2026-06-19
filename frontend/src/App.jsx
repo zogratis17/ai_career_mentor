@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { FiMenu } from 'react-icons/fi';
 import './App.css';
 
 // Pages
@@ -17,6 +18,7 @@ import Navigation from './components/Navigation';
 function App() {
   const [userId, setUserId] = useState(localStorage.getItem('userId'));
   const [userLoaded, setUserLoaded] = useState(false);
+  const [navOpen, setNavOpen] = useState(true);
 
   useEffect(() => {
     if (userId) {
@@ -33,9 +35,14 @@ function App() {
   return (
     <Router>
       <div className="app">
-        {userLoaded && <Navigation userId={userId} />}
+        {userLoaded && <Navigation userId={userId} isOpen={navOpen} onToggle={() => setNavOpen(!navOpen)} />}
         
-        <main className="main-content">
+        <main className={`main-content ${navOpen ? 'with-nav' : 'full-width'}`}>
+          {!navOpen && (
+            <button className="floating-menu-toggle" onClick={() => setNavOpen(true)} title="Show menu">
+              <FiMenu size={24} />
+            </button>
+          )}
           <Routes>
             <Route 
               path="/" 

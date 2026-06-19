@@ -31,8 +31,41 @@ body {
 
 .main-content {
   flex: 1;
-  margin-left: 0;
   padding: 2rem;
+  transition: margin-left 0.3s ease;
+}
+
+.main-content.with-nav {
+  margin-left: 280px;
+}
+
+.main-content.full-width {
+  margin-left: 0;
+}
+
+.floating-menu-toggle {
+  position: fixed;
+  top: 1.5rem;
+  left: 1.5rem;
+  background: var(--primary-color);
+  border: none;
+  color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.floating-menu-toggle:hover {
+  background: #4f46e5;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
 }
 
 @media (max-width: 768px) {

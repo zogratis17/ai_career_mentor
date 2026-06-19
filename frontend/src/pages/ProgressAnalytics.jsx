@@ -9,6 +9,7 @@ function ProgressAnalytics({ userId }) {
 
   useEffect(() => {
     fetchAnalytics();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchAnalytics = async () => {

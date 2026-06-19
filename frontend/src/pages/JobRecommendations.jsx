@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FiBriefcase, FiTrendingUp, FiCheckCircle } from 'react-icons/fi';
+import { FiBriefcase } from 'react-icons/fi';
 import './JobRecommendations.css';
 
 function JobRecommendations({ userId }) {
@@ -11,6 +11,7 @@ function JobRecommendations({ userId }) {
 
   useEffect(() => {
     fetchJobData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchJobData = async () => {

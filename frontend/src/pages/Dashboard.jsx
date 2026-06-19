@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { FiTrendingUp, FiBook, FiBriefcase, FiCheckCircle, FiClock } from 'react-icons/fi';
+import { FiTrendingUp, FiBook, FiCheckCircle, FiClock } from 'react-icons/fi';
 import StatCard from '../components/StatCard';
 import './Dashboard.css';
 
@@ -11,6 +11,7 @@ function Dashboard({ userId }) {
 
   useEffect(() => {
     fetchDashboard();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId]);
 
   const fetchDashboard = async () => {

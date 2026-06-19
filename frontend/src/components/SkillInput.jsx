@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FiPlus, FiSave } from 'react-icons/fi';
+import { FiSave } from 'react-icons/fi';
 import './SkillInput.css';
 
 function SkillInput({ userId, onSkillAdded }) {
